@@ -1,0 +1,278 @@
+:root {
+  --bg: #0c0c0c8b;
+  --border: #242323;
+  --color: #4e4b4b;
+  --bgimage: url("icons&img/photo-1502790671504-542ad42d5189.jpg");
+}
+
+html, body {
+
+  margin: 0;
+  padding: 0;
+  height: 600vh;
+  background: rgb(0, 0, 0);
+font-family: "Edu VIC WA NT Hand Pre", cursive;
+font-weight: bolder;
+word-spacing: 0.4vh;
+  
+  
+}
+
+
+.downmouse{
+
+  position: relative;
+  color: white;
+  top: 50vh;
+ display: grid;
+place-items: center;
+z-index: 10;
+animation: visible 1s  forwards, visible 1s 1.6s reverse forwards;
+}
+
+
+/* Canvas fills screen and stays fixed */
+canvas {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: visible 2s forwards;
+}
+@keyframes visible {
+  from{
+    opacity: 0;
+
+  }
+  to{opacity: 1;}
+}
+
+/* Dock container that scales with screen size */
+.container {
+  position: fixed;
+  bottom: 2.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: clamp(0.4em, 1vw, 0.8em) clamp(0.5em, 2vw, 1em);
+  background: var(--bg);
+  border: 2px ridge  var(--border);
+  
+  border-radius: 4vh;
+ backdrop-filter: blur(10px);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center;
+  z-index: 3;
+
+  /* Initially hidden */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+
+/* Show container when scroll ends */
+.container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.container.other {
+ opacity: 1;
+  pointer-events: auto;
+}
+
+/* Dock row */
+.dock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Individual dock items */
+.dock-item {
+  width: clamp(2vw, 3vw, 4vw);
+  height: clamp(2vw, 3vw, 4vw);
+  
+  margin: 0 clamp(4px, 1vw, 10px);
+ 
+
+
+
+  justify-content: center;
+  align-items: center;
+  transition: 700ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform-origin: bottom;
+  font-size: clamp(12px, 2vw, 5vh);
+  
+ }
+
+
+ .dock-item.animation{
+  animation: jump 1s 3 ;
+ }
+@keyframes jump {
+  
+
+0%{
+      
+       transform: translateY(0%); /* Starting from the bottom */
+     }
+     50%{
+      
+       transform: translateY(-100%); /* Final position */
+     }
+     100%{
+       transform: translateY(0%);
+     }
+    }
+
+    
+/* bg image */
+.img {
+  position: fixed;
+ 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:var(--bgimage) ;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* ensures the whole image is visible */
+  background-color: rgba(8, 235, 72, 0); /* fallback for empty areas */
+  opacity: 0;
+   backdrop-filter: blur(10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.img.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.img.animation{
+   opacity: 1;
+  pointer-events: auto;
+  animation:  visible  1s  ;
+  
+ 
+}
+
+
+
+/* 1st icon navbar */
+
+.navbarfan{
+  position: relative;
+ left: -1.5vh;
+  border-radius: 5vh;
+  height: 25vh;
+  justify-content: center;
+  align-items: center;
+  width: 3.9vw;
+  top: -40vh;
+visibility: hidden;
+backdrop-filter: blur(10px);
+  opacity: 1;
+  font-weight: bolder;
+  background-color: rgba(1, 1, 1, 0.449);
+}
+
+
+
+@keyframes clickd {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+.navbarfan.animation{
+  animation: fadeInAndMove 1s  forwards;
+ 
+ 
+  
+}
+.navbarfan.animationremove{
+  animation: fadeInAndMove 1s reverse   ;
+}
+
+@keyframes fadeInAndMove {
+     from {
+       opacity: 0;
+       visibility: hidden;
+       transform: translateY(100%); /* Starting from the bottom */
+     }
+     to {
+       opacity: 1;
+       visibility: visible;
+       transform: translateY(0); /* Final position */
+     }
+   }
+
+.clickdbl{
+  position: absolute;
+  color: white;
+  width: 100vw;
+  top: -50vh;
+  left: 15vh;
+  font-size: clamp(1vw, 2vw,5vw);
+visibility: hidden;
+
+}
+.clickdbl.animationclick{
+  animation: clickd  4s  forwards;
+  visibility: visible;
+}
+.iconback{
+  position: relative;
+  width: clamp(2vw, 3vw, 4vw);
+  height: clamp(2vw, 3vw, 4vw);
+  top: 1.4vh;
+  margin: 1vh clamp(0.1vw, 0.4vw, 0.5vw);
+  
+  
+  
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  transition: 700ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform-origin: bottom;
+  font-size: clamp(12px, 2vw, 5vh);
+}
+
+
+
+/* python */
+.crossbtn{
+    position: fixed;
+  top: 3vh;
+  right:3vh;
+  width: 4vh;
+  height:4vh;
+visibility: hidden;
+
+  
+  
+  
+  
+}
+
+@media (min-width:320px){
+  
+}
